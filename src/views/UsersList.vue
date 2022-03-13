@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center h-screen w-screen">
+  <div class="flex justify-center h-screen w-screen">
   <div class="container drop-shadow-md p-5 flex-col bg-slate-100 rounded-xl w-2/5 h-1/2">
 
     <!--HEADER-->
@@ -18,7 +18,7 @@
     </form>
 
     <!--FRIENDS LIST-->
-    <table class="table-auto w-full">
+    <table class="table-auto w-full overflow-y-scroll">
       <tbody>
         <tr v-for="user in filteredUsers" class="border-b-2 border-slate-300">
           <!--NAME-->
