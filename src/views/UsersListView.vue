@@ -1,11 +1,11 @@
 <template>
   <div class="flex justify-center h-screen w-screen">
-  <div class="container drop-shadow-md p-5 flex-col bg-slate-100 rounded-xl w-2/5 h-1/2">
+  <div class="container drop-shadow-md p-5 flex-col bg-slate-100 rounded-xl w-2/5 h-2/3">
 
     <!--HEADER-->
     <div class="mb-5">
       <SortMenu @sort="sortUsers" class="float-right"/>
-      <h2 class="text-lg font-bold text-slate-900 text-center">Users</h2>
+      <h2 class="text-xl font-bold text-slate-900 text-center">Users</h2>
     </div>
 
     <!--SEARCH FIELD-->
@@ -15,43 +15,42 @@
              placeholder="Search..." v-model="searchInput">
     </form>
 
+    <!--REQUESTS-->
+    <div class="w-full my-5 block py-5 border-y-2 border-slate-300">
+      <h3 class="font-semibold text-lg text-slate-900">Friend requests</h3>
+      <div v-for="request in friendRequests" class="flex flex-row gap-4">
+        <div class="font-medium">{{ request.username }}</div>
+        <CheckIcon class="h-6 w-6 stroke-slate-400"/>
+        <XIcon class="h-6 w-6 stroke-slate-400"/>
+      </div>
+    </div>
+
     <!--FRIENDS LIST-->
-    <table class="table-auto w-full overflow-y-scroll">
+    <div class="w-full overflow-y-scroll h-2/3">
+      <h3 class="font-semibold text-lg text-slate-900">All users</h3>
+    <table class="table-fixed w-full">
       <tbody>
-        <tr v-for="user in filteredUsers" class="border-b-2 border-slate-300">
+        <tr v-for="user in filteredUsers" class="border-b-2 border-slate-200 hover:bg-slate-200">
           <!--NAME-->
-          <td class="basis 1/2">{{ user.username }}</td>
-          <!--STATUS ICON-->
-          <td class="basis 1/4">
-            <div v-if="user.status == 'FRIENDS'">
+          <td class="basis 1/2 font-medium">{{ user.username }}</td>
+          <!--STATUS & ICON-->
+          <td class="basis 1/2">
+            <div v-if="user.status == 'FRIENDS'" class="flex flex-row gap-4">
+              <div class="italic">friends</div>
               <UserGroupIcon class="h-6 w-6 stroke-slate-400"/>
             </div>
-            <div v-else-if="user.status == 'NONE'">
+            <div v-else-if="user.status == 'NONE'" class="flex flex-row gap-4">
               <UserAddIcon class="h-6 w-6 stroke-slate-400"/>
             </div>
-            <div v-else-if="user.status == 'INVITATIONRECEIVED'" class="flex flex-row">
-              <CheckIcon class="h-6 w-6 stroke-slate-400"/>
-              <XIcon class="h-6 w-6 stroke-slate-400"/>
-            </div>
-          </td>
-          <!--STATUS TEXT-->
-          <td class="basis 1/4">
-            <div v-if="user.status == 'FRIENDS'">
-              friends
-            </div>
-            <div v-else-if="user.status == 'NONE'">
-              click to add a friend
-            </div>
-            <div v-else-if="user.status == 'INVITATIONRECEIVED'">
-              friend request received
-            </div>
-            <div v-else-if="user.status == 'INVITATIONSENT'">
-              request status pending...
+            <div v-else-if="user.status == 'INVITATIONSENT'" class="flex flex-row gap-2 items-center">
+              <div class="italic">your request is pending...</div>
+              <ClockIcon class="w-5 h-5 stroke-slate-400"/>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
   </div>
 </template>
@@ -59,7 +58,7 @@
 <script setup lang="ts">
 import {computed, inject, ref} from "vue";
 import SortMenu from '@/components/SortMenu.vue'
-import {UserGroupIcon, UserAddIcon, CheckIcon, XIcon, SearchIcon} from "@heroicons/vue/outline";
+import {UserGroupIcon, UserAddIcon, CheckIcon, XIcon, SearchIcon, ClockIcon} from "@heroicons/vue/outline";
 import * as _ from 'underscore';
 import type {GetUsersDto} from "@/dtos/GetUsersDto";
 import {UserService} from "@/services/UserService";
@@ -69,6 +68,7 @@ const userService = inject<UserService>("userService");
 const searchInput = ref("");
 const sortType = ref("none"); //none ; friendStatus ; alphabetically
 const users = ref([]);
+const friendRequests = ref([]);
 
 //TO CHANGE AFTER MERGING WITH LOGIN FUNCTIONALITY
 const loggedUserId = 1;
@@ -76,6 +76,8 @@ const loggedUserId = 1;
 userService?.getAllUsers(loggedUserId)
     .then((response) => {
       users.value = response.data as GetUsersDto[];
+      friendRequests.value = users.value.filter((user) => user.status=="INVITATIONRECEIVED")
+      users.value = users.value.filter((user) => user.status!="INVITATIONRECEIVED")
     })
     .catch((error) => {
       console.log("error: " + error);
