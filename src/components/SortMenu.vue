@@ -3,7 +3,7 @@
     <!--BUTTON-->
     <div @click="toggleDropdown()" class="hover:cursor-pointer">
     <button>
-      <DotsVerticalIcon class="h-6 w-6 stroke-slate-400"/>
+      <DotsVerticalIcon class="h-6 w-6 stroke-slate-400 hover:stroke-slate-600"/>
     </button>
     </div>
 
