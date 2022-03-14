@@ -7,7 +7,8 @@ provide("userService", new UserService());
 </script>
 
 <template>
-  <RouterLink to="/users">Users</RouterLink>
+  <RouterLink to="/users">Users</RouterLink> |
+  <RouterLink to="/rooms">Rooms</RouterLink>
   <RouterView />
 </template>
 
