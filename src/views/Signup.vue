@@ -51,45 +51,61 @@ const myRouter: any = useRouter();
 
 
 function changeSignUp(){
-  if(signingUp.value ==="Sign in")
+  if(signingUp.value ==="Sign in"){
     signingUp.value = "Sign Up";
-  else
+    }
+  else{
     signingUp.value = "Sign in";
+    }
 }
 
 async function signIn(this: any){
-  if(username.value && password.value){
+    if(username.value && password.value){
 
-    console.log(username.value)
-    console.log(password.value)
+      console.log(username.value)
+      console.log(password.value)
 
-  await userService?.signIn({username: username.value,
-    password: password.value}).then(
-    response =>{
-      loggedUser.value = response.data as GetUsersDto;
+      if(signingUp.value ==="Sign in"){
+          await userService?.signIn({username: username.value,
+            password: password.value}).then(
+            response =>{
+              loggedUser.value = response.data as GetUsersDto;
+            }
+          ).catch((error) => {
+              console.log("error: " + error.message);
+            });
+      }
+
+
+      else if(signingUp.value ==="Sign Up"){
+          await userService?.signUp({username: username.value,
+            password: password.value}).then(
+            response =>{
+              loggedUser.value = response.data as GetUsersDto;
+            }
+          ).catch((error) => {
+              console.log("error: " + error.message);
+            });
+      }
+
+      if(loggedUser.value?.id!==undefined){
+        console.log("id: "+ loggedUser.value?.id+ "      username: " +loggedUser.value?.username)
+        //sign in
+        userStore.signInUser(loggedUser.value);
+        //go to other page
+        myRouter.push('users');
+
+      } else{
+        if(signingUp.value ==="Sign in")
+           console.log("such user doesnt exist")
+        else
+          console.log("username already exists")
+      }
     }
-  ).catch((error) => {
-      console.log("error: " + error.message);
-    });
-
-    if(loggedUser.value?.id!==undefined){
-      console.log("id: "+ loggedUser.value?.id+ "      username: " +loggedUser.value?.username)
-      //sign in
-      userStore.signInUser(loggedUser.value);
-      //go to other page
-      myRouter.push('users');
-
-    } else{
-      console.log("such user doesnt exist")
-    }
-
-
-    
-
-  }
-
 
 }
+
+
 
 </script>
 

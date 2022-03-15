@@ -18,12 +18,11 @@ export class UserService {
 
     async signIn(credentials: UserCredentialsDto){
      return  await this.http.post("/users", credentials);
-
     }
 
+    async signUp(credentials: UserCredentialsDto){
+        return  await this.http.post("/users/signup", credentials);
+       }
 
-    createUserandSignUp(username: string, password: string) {
-        throw new Error("Method not implemented.");
-    }
 }
 export default new UserService();
