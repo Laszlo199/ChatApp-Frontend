@@ -15,7 +15,7 @@ export class UserService {
     }
 
 
-    async signIn(credentials: UserCredentialsDto): Promise<GetUsersDto> {
+    async signIn(credentials: UserCredentialsDto){
      return  await this.http.post("/users", credentials);
 
     }

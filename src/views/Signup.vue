@@ -2,7 +2,7 @@
   <div class="min-h-screen flex items-center justify-center">
 
     <!--login box    -->
-    <div class="px-16 shadow-2xl pt-16 pb-11 rounded-2xl shadow-2xl w-1/3 bg-amber-100">
+    <div class="px-16 shadow-2xl pt-16 pb-11 rounded-2xl  w-1/3 bg-amber-100">
 
       <h3  class="text-slate-900 font-bold text-5xl mb-12 text-center	">{{signingUp}}</h3>
 
@@ -43,7 +43,8 @@ const password = ref("")
 const signingUp = ref("Sign in");
 const userService = inject<UserService>("userService");
 const isLoggedIn = ref(false)
-const loggedUser = ref();
+const loggedUser= ref();
+
 
 function changeSignUp(){
   if(signingUp.value ==="Sign in")
@@ -60,13 +61,21 @@ function signIn(){
 
   userService?.signIn({username: username.value,
     password: password.value}).then(
-    //value => loggedUser.value = value
+    (response) =>{
+      loggedUser.value = response.data as GetUsersDto;
+    }
   ).catch((error) => {
       console.log("error: " + error.message);
     });
 
-  if(loggedUser.value !==null)
-    console.log("suceess?")
+    if(loggedUser){
+      console.log("id: "+ loggedUser.value?.id+ "      username: " +loggedUser.value?.username)
+    } else{
+      console.log("such user doesnt exist")
+    }
+
+
+    
 
   }
 
