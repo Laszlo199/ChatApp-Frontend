@@ -3,6 +3,7 @@ import type { UserCredentialsDto } from "@/dtos/userCredentialsDto";
 import type { GetUsersDto } from "@/dtos/GetUsersDto";
 
 export class UserService {
+    
     http = axios.create({
         baseURL: "http://localhost:3001",
         headers: {
@@ -18,6 +19,11 @@ export class UserService {
     async signIn(credentials: UserCredentialsDto){
      return  await this.http.post("/users", credentials);
 
+    }
+
+
+    createUserandSignUp(username: string, password: string) {
+        throw new Error("Method not implemented.");
     }
 }
 export default new UserService();
