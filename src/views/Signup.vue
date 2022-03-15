@@ -21,7 +21,7 @@
 
         <div class="ml-2 text-gray-800 font-bold text-blue-600
         outline-none hover:text-blue-900">
-          <label  @click="changeSignUp">I don't have an account. Sign up instead!</label>
+          <label  @click="changeSignUp">{{info}}</label>
         </div>
 
         <button @click="signIn" class="block w-full bg-purple-600 py-4 rounded
@@ -43,19 +43,21 @@ const username = ref("")
 const password = ref("")
 const signingUp = ref("Sign in");
 const userService = inject<UserService>("userService");
-const isLoggedIn = ref(false)
 const loggedUser= ref();
 const userStore = UserStore();
 const myRouter: any = useRouter();
+const info = ref("I don't have an account. Sign up instead!")
 
 
 
 function changeSignUp(){
   if(signingUp.value ==="Sign in"){
     signingUp.value = "Sign Up";
+    info.value = "hmm ..Sign in anyway!"
     }
   else{
     signingUp.value = "Sign in";
+    info.value = "I don't have an account. Sign up instead!"
     }
 }
 
@@ -96,10 +98,14 @@ async function signIn(this: any){
         myRouter.push('users');
 
       } else{
-        if(signingUp.value ==="Sign in")
+        if(signingUp.value ==="Sign in"){
            console.log("such user doesnt exist")
-        else
+           //TODO show label for 30 seconds that such user doesnt exist
+        }
+        else{
           console.log("username already exists")
+          //TODO show label for 30 seconds that username already exists
+          }
       }
     }
 
