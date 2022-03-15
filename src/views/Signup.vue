@@ -53,7 +53,7 @@ function changeSignUp(){
     signingUp.value = "Sign in";
 }
 
-function signIn(){
+ function signIn(){
   if(username.value && password.value){
 
     console.log(username.value)
@@ -61,7 +61,7 @@ function signIn(){
 
   userService?.signIn({username: username.value,
     password: password.value}).then(
-    (response) =>{
+    response =>{
       loggedUser.value = response.data as GetUsersDto;
     }
   ).catch((error) => {
