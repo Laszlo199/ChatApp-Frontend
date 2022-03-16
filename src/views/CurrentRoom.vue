@@ -12,7 +12,7 @@
       <form @submit.prevent="sendChat" class="group relative mb-5">
         <input class="focus:ring-2 focus:ring-slate-400 focus:outline-none appearance-none w-2/3 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects"
                placeholder="Message..." v-model="txtChatInput">
-        <button class="text-black m-12 w-1/6 py-1.5 rounded bg-slate-500" @click="sendChat">Send</button>    
+        <button class="text-black m-12 w-1/6 py-1.5 rounded bg-slate-500">Send</button>    
       </form>
 
 
@@ -72,9 +72,9 @@ function sendChat() {
     //assign it here
 
     //why do we need the roomId
-    
+
     let chatToSend = { text: txtChatInput.value, roomName: chatStore.roomName,
-     userId: 1 }; // we need a user id from userStore (not merged yet)
+     userId: Date.now() % 234 }; // we need a user id from userStore (not merged yet)
     //we need to get an id of the chat
     console.log("text:: "+ chatToSend.text)
     chatStore.createChat(chatToSend);

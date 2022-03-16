@@ -24,11 +24,11 @@ export const ChatStore = defineStore({
     createChat(chat: PostChatDto) {
         //here we can add an id ..
       chatService.createChat(chat)
-     // this.chats.push(chat);
+      //this.chats.push(chat); // we can delete it??
     },
-    receiveChat(chat: PostChatDto) {
-      this.chats.push(chat);
-    },
+    // receiveChat(chat: PostChatDto) {
+    //   this.chats.push(chat);
+    // },
     setRoom(roomName: string) {
       console.log("room name: "+ roomName)
       if (this.roomName) chatService.disconnectFromRoom(this.roomName);
