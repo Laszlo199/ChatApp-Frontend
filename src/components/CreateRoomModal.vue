@@ -62,14 +62,18 @@
 import {PencilAltIcon, ChevronRightIcon} from "@heroicons/vue/outline";
 import {computed, inject, ref} from "vue";
 import {RoomService} from "@/services/RoomService";
-
+import type { GetRoomsDto } from "@/dtos/GetRoomsDto";
+import { ChatStore } from "@/stores/chatStore";
+import { useRouter } from 'vue-router'
+const myRouter: any = useRouter();
 const roomService = inject<RoomService>("roomService");
-
+const chatStore = ChatStore();
 const max = 35; //max number of characters for room name
 const roomNameInput = ref("");
 const wasSuccess = ref(false);
 
 let newRoomId=0;
+let room ={ } as GetRoomsDto
 
 const maxCharInfo = computed(()=> {
   if(roomNameInput.value.length==max) return "Max. "+max+" characters";
@@ -80,16 +84,21 @@ function createRoom() {
   if(roomNameInput.value.length>2) {
     roomService?.createRoom(roomNameInput.value).then((data) => {
       wasSuccess.value = true;
-      newRoomId=data.id;
+      newRoomId=data.id; //when we create a room we can return that heckin room
+      room = data 
       console.log(data);
     }).catch((error) => console.log("error: " + error));
   }
 }
 
 function goToRoom() {
-  if(newRoomId!=0){
+  if(room){
     console.log(newRoomId);
     //TODO go to created room
+      console.log(room.author +" "+ room.name)
+      chatStore.setRoom(room.name);
+      //and now follow there
+      myRouter.push('chat');
   }
 }
 </script>

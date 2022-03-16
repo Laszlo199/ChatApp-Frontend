@@ -33,6 +33,9 @@ export const ChatStore = defineStore({
       console.log("room name: "+ roomName)
       if (this.roomName) chatService.disconnectFromRoom(this.roomName);
       this.roomName = roomName;
+      this.chats = [] // clear when we change rooms
+      //so we wont see messeges from other rooms (btw in real life
+      //it could  be a dissaster )
       chatService.listenToRoom(roomName, (chat) => {
         this.chats.push(chat);
       });
