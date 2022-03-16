@@ -5,7 +5,7 @@
 
       <!--HEADER-->
       <div class="mb-5">
-        <h2 class="text-xl font-bold text-slate-900 text-center">Room: </h2>
+        <h2 class="text-xl font-bold text-slate-900 text-center">Room: {{chatStore.roomName}} </h2>
       </div>
 
     <!--SEARCH FIELD-->
@@ -70,6 +70,8 @@ function leaveRoom() {
 function sendChat() {
     //for the room id we can create a getter in Chat store and
     //assign it here
+
+    //why do we need the roomId
     
     let chatToSend = { text: txtChatInput.value, roomId: 1,
      userId: 1 }; // we need a user id from userStore (not merged yet)

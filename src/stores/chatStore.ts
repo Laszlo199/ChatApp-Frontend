@@ -12,7 +12,7 @@ export const ChatStore = defineStore({
   state: () => ({
     chats: [
       { text: "First chat", userId:1 },
-     { text: "Second chat", userId:1 } ] as PostChatDto[], // we don't need id's maybe we should store is as a model
+     { text: "Second chat", userId:2 } ] as PostChatDto[], // we don't need id's maybe we should store is as a model
      roomName: ""
   }),
   // getters: {
@@ -23,6 +23,7 @@ export const ChatStore = defineStore({
   actions: {
     createChat(chat: PostChatDto) {
         //here we can add an id ..
+      chatService.createChat(chat)
       this.chats.push(chat);
     },
     receiveChat(chat: PostChatDto) {
