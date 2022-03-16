@@ -9,12 +9,15 @@
       </div>
 
     <!--SEARCH FIELD-->
-      <form @submit.prevent="sendChat" class="group relative mb-5 flex flex-row w-full">
-            <input class=" basis-4/5 focus:ring-2 focus:ring-slate-400 focus:outline-none appearance-none w-2/3 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects"
-               placeholder="Message..." v-model="txtChatInput">
-            <button class=" basis-1/5 text-black m-12 w-1/6 py-1.5 rounded bg-slate-500">Send</button>  
-       
-      </form>
+      
+        <form @submit.prevent="sendChat" class="group relative mb-5 flex flex-row w-full h-16 p-2 space-x-2.5">
+
+              <input class=" basis-4/5 focus:ring-2 focus:ring-slate-400 focus:outline-none appearance-none w-2/3 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects"
+                placeholder="Message..." v-model="txtChatInput">
+              <button class=" basis-1/5 text-black  rounded bg-slate-500">Send</button>  
+        
+        </form>
+      
 
 
       <!--Messages LIST-->
