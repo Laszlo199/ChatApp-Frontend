@@ -22,7 +22,7 @@
       <div class="w-full overflow-y-scroll h-2/3">
         <table class="table-auto w-full">
           <tbody>
-          <tr v-for="room in filteredRooms" class="hover:bg-slate-200">
+          <tr v-for="room in filteredRooms" v-bind:key="room.id" class="hover:bg-slate-200">
             <!--NAME-->
             <td class="basis 1/4">
               <div class="font-semibold">{{ room.name }}</div>
@@ -31,7 +31,7 @@
             <td class="basis 1/2" v-bind:class="{ italic: room.author=='you' }">{{room.author}}</td>
             <!--JOIN BTN-->
             <td class="basis 1/4 float-right">
-              <button class="flex flex-row items-center h-8 px-6 rounded-md border border-slate-200 bg-white hover:scale-105" >
+              <button @click="goToRoom(room)" class="flex flex-row items-center h-8 px-6 rounded-md border border-slate-200 bg-white hover:scale-105" >
                 <div class="font-medium text-slate-900">join</div>
                 <ChevronRightIcon class="h-4 w-4 stroke-slate-400"/>
               </button>
@@ -50,10 +50,13 @@ import {computed, inject, ref} from "vue";
 import CreateRoomModal from "@/components/CreateRoomModal.vue";
 import {RoomService} from "@/services/RoomService";
 import type {GetRoomsDto} from "@/dtos/GetRoomsDto";
-
+import { ChatStore } from "@/stores/chatStore";
+import { useRouter } from 'vue-router'
 const isModalOpen = ref(false);
 const searchInput = ref("");
-const rooms = ref([]);
+const rooms = ref<GetRoomsDto[]>([]);
+const chatStore = ChatStore();
+const myRouter: any = useRouter();
 
 const roomService = inject<RoomService>("roomService");
 
@@ -74,6 +77,14 @@ function refreshList() {
   roomService?.getAllRooms(loggedUserId)
       .then((result) => rooms.value = result.data as GetRoomsDto[])
       .catch((error)=>console.log("error: "+error))
+}
+
+function goToRoom(room: GetRoomsDto){
+  console.log(room.author +" "+ room.name)
+  //set current room
+  chatStore.setRoom(room);
+  //and now follow there
+  myRouter.push('chat');
 }
 
 </script>
