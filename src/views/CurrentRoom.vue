@@ -9,10 +9,11 @@
       </div>
 
     <!--SEARCH FIELD-->
-      <form @submit.prevent="sendChat" class="group relative mb-5">
-        <input class="focus:ring-2 focus:ring-slate-400 focus:outline-none appearance-none w-2/3 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects"
+      <form @submit.prevent="sendChat" class="group relative mb-5 flex flex-row w-full">
+            <input class=" basis-4/5 focus:ring-2 focus:ring-slate-400 focus:outline-none appearance-none w-2/3 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects"
                placeholder="Message..." v-model="txtChatInput">
-        <button class="text-black m-12 w-1/6 py-1.5 rounded bg-slate-500">Send</button>    
+            <button class=" basis-1/5 text-black m-12 w-1/6 py-1.5 rounded bg-slate-500">Send</button>  
+       
       </form>
 
 
@@ -73,8 +74,9 @@ function sendChat() {
 
     //why do we need the roomId
 
+    //TODO also tomorrow we can show a real name instead if usersId. user is stored in userStore so it shouldnt be a problem  
     let chatToSend = { text: txtChatInput.value, roomName: chatStore.roomName,
-     userId: Date.now() % 234 }; // we need a user id from userStore (not merged yet)
+     userId: Date.now() % 234 }; // we need a user id from userStore (not merged yet with main branch)
     //we need to get an id of the chat
     console.log("text:: "+ chatToSend.text)
     chatStore.createChat(chatToSend);
