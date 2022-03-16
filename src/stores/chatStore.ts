@@ -24,7 +24,7 @@ export const ChatStore = defineStore({
     createChat(chat: PostChatDto) {
         //here we can add an id ..
       chatService.createChat(chat)
-      this.chats.push(chat);
+     // this.chats.push(chat);
     },
     receiveChat(chat: PostChatDto) {
       this.chats.push(chat);

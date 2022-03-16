@@ -73,7 +73,7 @@ function sendChat() {
 
     //why do we need the roomId
     
-    let chatToSend = { text: txtChatInput.value, roomId: 1,
+    let chatToSend = { text: txtChatInput.value, roomName: chatStore.roomName,
      userId: 1 }; // we need a user id from userStore (not merged yet)
     //we need to get an id of the chat
     console.log("text:: "+ chatToSend.text)

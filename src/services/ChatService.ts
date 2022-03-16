@@ -12,7 +12,7 @@ export class ChatService{
   }
 
   createChat(chat: PostChatDto) {
-    chat.roomName = "jjjjj" //TEMporary solution!!
+    //chat.roomName = "jjjjj" //TEMporary solution!!
     this.socket.emit("createChat", chat);
   }
 
