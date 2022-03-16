@@ -39,7 +39,8 @@
 <script setup lang="ts">
 import type { GetUsersDto } from "@/dtos/GetUsersDto";
 import type { UserService } from "@/services/UserService";
-import { UserStore } from "../stores/userStore";
+import { UserStore } from "@/stores/UserStore";
+
 import { inject, ref } from "vue";
 import { useRouter } from 'vue-router'
 const username = ref("")
@@ -111,6 +112,8 @@ async function signIn(this: any){
             password: password.value}).then(
             response =>{
               loggedUser.value = response.data as GetUsersDto;
+
+            
             }
           ).catch((error) => {
               console.log("error: " + error.message);
@@ -120,9 +123,18 @@ async function signIn(this: any){
       if(loggedUser.value?.id!==undefined){
         console.log("id: "+ loggedUser.value?.id+ "      username: " +loggedUser.value?.username)
         //sign in
-        userStore.signInUser(loggedUser.value);
+       // userStore.signInUser(loggedUser.value);
         //go to other page
-        myRouter.push('users');
+            if(loggedUser.value?.id!==undefined){
+                 await goo()
+                
+                  myRouter.push('users');
+                  await goo()
+                  myRouter.push('users');
+               }
+
+        
+        
 
       } else{
         if(signingUp.value ==="Sign in"){
@@ -140,7 +152,10 @@ async function signIn(this: any){
 
 }
 
-
+async function goo() {
+  userStore.authenticate();
+  userStore.signInUser(loggedUser.value);
+}
 
 </script>
 
