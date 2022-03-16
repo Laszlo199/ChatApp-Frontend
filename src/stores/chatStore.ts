@@ -10,34 +10,29 @@ const chatService = new ChatService();
 export const ChatStore = defineStore({
   id: "ChatStore",
   state: () => ({
-    chats: [{ text: "First chat" }, { text: "Second chat" }] as PostChatDto[], // we don't need id's maybe we should store is as a model
-    room: [] as GetRoomsDto[],
+    chats: [
+      { text: "First chat", userId:1 },
+     { text: "Second chat", userId:1 } ] as PostChatDto[], // we don't need id's maybe we should store is as a model
+     roomName: ""
   }),
-  getters: {
-    chats: (state) => { return state.chats;
-    },
-  },
+  // getters: {
+  //   chats: (state) => { 
+  //     return state.chats;
+  //   },
+  // },
   actions: {
     createChat(chat: PostChatDto) {
-      chatService.createChat(chat);
+        //here we can add an id ..
       this.chats.push(chat);
     },
     receiveChat(chat: PostChatDto) {
       this.chats.push(chat);
     },
-    setRoom(room: GetRoomsDto) {
-      if (this.room.length ==1){
-         chatService.disconnectFromRoom(this.room[0].id.toString());
-         console.log("we shouldnt get there")
-      }
-      if(this.room.length==0)
-            this.room.push(room);
-      else{
-          this.room.pop();
-          this.room.push();
-      }
-      console.log("set room in store: "+ room.name)
-      chatService.listenToRoom(room.id.toString(), (chat)=> {
+    setRoom(roomName: string) {
+      console.log("room name: "+ roomName)
+      if (this.roomName) chatService.disconnectFromRoom(this.roomName);
+      this.roomName = roomName;
+      chatService.listenToRoom(roomName, (chat) => {
         this.chats.push(chat);
       });
     },

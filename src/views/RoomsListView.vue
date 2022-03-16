@@ -81,8 +81,7 @@ function refreshList() {
 
 function goToRoom(room: GetRoomsDto){
   console.log(room.author +" "+ room.name)
-  //set current room
-  chatStore.setRoom(room);
+  chatStore.setRoom(room.name);
   //and now follow there
   myRouter.push('chat');
 }
