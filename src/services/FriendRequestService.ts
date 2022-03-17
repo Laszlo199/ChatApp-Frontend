@@ -3,6 +3,7 @@ import type { FriendRequestDto } from "@/dtos/FriendRequestDto";
 import type { GetUsersDto } from "@/dtos/GetUsersDto";
 import type { UpdateFriendRequestDto } from "@/dtos/UpdateFriendRequestDto";
 import axios from "axios";
+import { UserStore } from "@/stores/UserStore";
 
 export class FriendRequestService {
   socket = io("localhost:3001");
@@ -26,7 +27,8 @@ export class FriendRequestService {
   }
   
   listenFriendRequest(requestListener: (request: FriendRequestDto)=> void){
-    const userId = 1;
+    const userStore = UserStore();
+    const userId = userStore.loggedInUser.id
     this.socket.on('request-'+userId, (request: FriendRequestDto) =>{
       requestListener(request);
     })
@@ -37,7 +39,7 @@ export class FriendRequestService {
     return this.http.delete("/deleteRequest"+id)
   }
 
-  updateFriendRequest(id: number, updateFriendDto: UpdateFriendRequestDto){
+  async updateFriendRequest(id: number, updateFriendDto: UpdateFriendRequestDto){
     return this.http.patch("/updateRequest"+id,updateFriendDto)
   }
 }
