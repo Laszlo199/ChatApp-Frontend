@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 import type { FriendRequestDto } from "@/dtos/FriendRequestDto";
+import type { GetUsersDto } from "@/dtos/GetUsersDto";
 
 export class FriendRequestService {
   socket = io("localhost:3001");
@@ -14,8 +15,20 @@ export class FriendRequestService {
   createFriendRequest(friendDto: FriendRequestDto) {
     this.socket.emit("createFriendRequest", friendDto);
   }
+  
+  // maybe not like that.
+  listenFriendRequest(status: string, statusListener: (user: GetUsersDto) => void){
+    this.socket.on(status, (user: GetUsersDto) =>{
+      statusListener(user);
+    })
 
-  getFriendRequest(friendDto: FriendRequestDto){
-    this.socket.emit("getFriendRequest", friendDto);
+  }
+
+  getFriendRequest(receiverId: number){
+    this.socket.emit("getFriendRequest", receiverId);
+  }
+
+   deleteFriendRequest(id: number) {
+    this.socket.emit("removeFriendRequest" + id);
   }
 }

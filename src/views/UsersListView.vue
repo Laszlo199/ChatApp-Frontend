@@ -62,8 +62,10 @@ import {UserGroupIcon, UserAddIcon, CheckIcon, XIcon, SearchIcon, ClockIcon} fro
 import * as _ from 'underscore';
 import type {GetUsersDto} from "@/dtos/GetUsersDto";
 import {UserService} from "@/services/UserService";
+import { FriendRequestService } from "@/services/FriendRequestService";
 
 const userService = inject<UserService>("userService");
+const friendRequestService = inject<FriendRequestService>("friendService");
 
 const searchInput = ref("");
 const sortType = ref("none"); //none ; friendStatus ; alphabetically
@@ -97,6 +99,10 @@ const filteredUsers = computed(()=> {
 
 function sortUsers(type) {
   sortType.value = type;
+}
+
+function createFriendRequest(){
+  //friendRequestService?.createFriendRequest()
 }
 
 </script>
