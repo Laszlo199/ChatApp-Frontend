@@ -2,13 +2,12 @@
 import type { GetUsersDto } from "@/dtos/GetUsersDto";
 import { UserService } from "@/services/UserService";
 import { defineStore } from "pinia";
-
-const userService: UserService = new UserService();
+import type { User } from "@/model/User";
 
 export const UserStore = defineStore({
   id: "userStore",
   state: () => ({
-    loggedInUser: { username: "" } as GetUsersDto,
+    loggedInUser: { username: "" } as User,
   }),
   getters: {
     userName: (state) => {
@@ -17,13 +16,7 @@ export const UserStore = defineStore({
     },
   },
   actions: {
-  /*  createUserandSignUp(username: string, password: string) {
-      userService
-        .createUserandSignUp(username, password)
-        .then((user) => (this.loggedInUser = user))
-        .catch((err) => console.log(err));
-    }, */
-    signInUser(signedInUser: GetUsersDto){
+    signInUser(signedInUser: User){
         this.loggedInUser =signedInUser;
     }
 

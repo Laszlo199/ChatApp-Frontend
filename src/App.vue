@@ -7,7 +7,6 @@ provide("userService", new UserService());
 </script>
 
 <template>
-<!--  <RouterLink to="/users">Users</RouterLink>-->
   <RouterView />
 </template>
 
