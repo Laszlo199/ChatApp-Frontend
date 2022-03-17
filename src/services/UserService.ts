@@ -12,7 +12,7 @@ export class UserService {
     });
 
     getAllUsers(id: number) {
-        return this.http.get("/users/userId");
+        return this.http.get("/users/userId/"+id);
     }
 
 
