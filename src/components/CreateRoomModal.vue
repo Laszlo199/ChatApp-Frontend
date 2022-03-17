@@ -25,6 +25,10 @@
               <div v-if="wasSuccess" class="mt-2">
                 <p class="italic text-sky-500">Room successfully added!</p>
               </div>
+              <!-- confict in user names. room name should be unique -->
+                <div v-if="namesConflict" class="mt-2">
+                <p class="italic text-red-700">Please input unique name</p>
+              </div>
               <!--MAX CHARACTERS-->
               <div v-if="maxCharInfo.length>0 && !wasSuccess">
                 <p class="italic text-slate-400">{{maxCharInfo}}</p>
@@ -71,6 +75,7 @@ const chatStore = ChatStore();
 const max = 35; //max number of characters for room name
 const roomNameInput = ref("");
 const wasSuccess = ref(false);
+const namesConflict = ref(false) // just for the sake of testing
 
 let newRoomId=0;
 let room ={ } as GetRoomsDto
@@ -82,12 +87,20 @@ const maxCharInfo = computed(()=> {
 
 function createRoom() {
   if(roomNameInput.value.length>2) {
+    namesConflict.value = false
     roomService?.createRoom(roomNameInput.value).then((data) => {
-      wasSuccess.value = true;
-      newRoomId=data.id; //when we create a room we can return that heckin room
+      
+      //newRoomId=data.id; //when we create a room we can return that heckin room
       room = data 
+      if(room.id ==undefined){
+      namesConflict.value = true;
+    }else
+      wasSuccess.value = true;
+
       console.log(data);
     }).catch((error) => console.log("error: " + error));
+
+    console.log("room that should/shouldnt be created: "+ room.name)
   }
 }
 
