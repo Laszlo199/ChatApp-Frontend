@@ -27,7 +27,7 @@
               </div>
               <!-- confict in user names. room name should be unique -->
                 <div v-if="namesConflict" class="mt-2">
-                <p class="italic text-red-700">Please input unique name</p>
+                <p class="italic text-red-700">a room with that name already exists</p>
               </div>
               <!--MAX CHARACTERS-->
               <div v-if="maxCharInfo.length>0 && !wasSuccess">
@@ -75,7 +75,7 @@ const chatStore = ChatStore();
 const max = 35; //max number of characters for room name
 const roomNameInput = ref("");
 const wasSuccess = ref(false);
-const namesConflict = ref(false) // just for the sake of testing
+const namesConflict = ref(false)
 
 let newRoomId=0;
 let room ={ } as GetRoomsDto
@@ -90,7 +90,6 @@ function createRoom() {
     namesConflict.value = false
     roomService?.createRoom(roomNameInput.value).then((data) => {
       
-      //newRoomId=data.id; //when we create a room we can return that heckin room
       room = data 
       if(room.id ==undefined){
       namesConflict.value = true;
@@ -107,7 +106,7 @@ function createRoom() {
 function goToRoom() {
   if(room){
     console.log(newRoomId);
-    //TODO go to created room
+      //go to created room
       console.log(room.author +" "+ room.name)
       chatStore.setRoom(room.name);
       //and now follow there

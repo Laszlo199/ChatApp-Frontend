@@ -40,47 +40,19 @@
 </template>
 
 <script setup lang="ts">
-//TODO remember to allign button and input in one line
-
-//we need to pass a user for sure --> we dont cause we store them in userStore
-//we need to pass 
-//- actually we don't need to pass props cause we can set room to listen in our store. 
-// but we need to get it then from the store after we get to this class
-
-
 import type { GetChatDto } from "@/dtos/chat/GetChatDto";
 import type { GetRoomsDto } from "@/dtos/GetRoomsDto";
 import { ChatStore } from "@/stores/chatStore";
 import { computed, ref } from "vue";
 const chatStore = ChatStore();
 const txtChatInput = ref("");
-//const txtRoomInput = ref("");
 const txtRoomListener = ref("");
 
 
-//idk why the list isn't shown
-
-//we need to merge with origin
-//const currentUser = userStore.user
-
-function leaveRoom() {
- //make store stop listening to this room
-}
-
-
-/**
- * this method has to be modified
- */
 function sendChat() {
-    //for the room id we can create a getter in Chat store and
-    //assign it here
-
-    //why do we need the roomId
-
-    //TODO also tomorrow we can show a real name instead if usersId. user is stored in userStore so it shouldnt be a problem  
+    //TODO  show a real name 
     let chatToSend = { text: txtChatInput.value, roomName: chatStore.roomName,
      userId: Date.now() % 234 }; // we need a user id from userStore (not merged yet with main branch)
-    //we need to get an id of the chat
     console.log("text:: "+ chatToSend.text)
     chatStore.createChat(chatToSend);
 }
