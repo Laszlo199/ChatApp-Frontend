@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import type { GetChatDto } from "@/dtos/chat/GetChatDto";
 import type { GetRoomsDto } from "@/dtos/GetRoomsDto";
-import { ChatStore } from "@/stores/chatStore";
+import { ChatStore } from "@/stores/ChatStore";
 import { computed, ref } from "vue";
 import { UserStore } from "@/stores/UserStore";
 const chatStore = ChatStore();

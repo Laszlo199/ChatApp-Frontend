@@ -62,16 +62,16 @@ import {UserGroupIcon, UserAddIcon, CheckIcon, XIcon, SearchIcon, ClockIcon} fro
 import * as _ from 'underscore';
 import type {GetUsersDto} from "@/dtos/GetUsersDto";
 import {UserService} from "@/services/UserService";
+import {UserStore} from "@/stores/UserStore";
 
 const userService = inject<UserService>("userService");
+const userStore = UserStore();
+const loggedUserId = userStore.id;
 
 const searchInput = ref("");
 const sortType = ref("none"); //none ; friendStatus ; alphabetically
 const users = ref([]);
 const friendRequests = ref([]);
-
-//TO CHANGE AFTER MERGING WITH LOGIN FUNCTIONALITY
-const loggedUserId = 1;
 
 userService?.getAllUsers(loggedUserId)
     .then((response) => {

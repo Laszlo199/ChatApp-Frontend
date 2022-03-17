@@ -67,7 +67,7 @@ import {PencilAltIcon, ChevronRightIcon} from "@heroicons/vue/outline";
 import {computed, inject, ref} from "vue";
 import {RoomService} from "@/services/RoomService";
 import type { GetRoomsDto } from "@/dtos/GetRoomsDto";
-import { ChatStore } from "@/stores/chatStore";
+import { ChatStore } from "@/stores/ChatStore";
 import { useRouter } from 'vue-router'
 const myRouter: any = useRouter();
 const roomService = inject<RoomService>("roomService");

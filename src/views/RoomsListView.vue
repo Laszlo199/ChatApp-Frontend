@@ -50,8 +50,9 @@ import {computed, inject, ref} from "vue";
 import CreateRoomModal from "@/components/CreateRoomModal.vue";
 import {RoomService} from "@/services/RoomService";
 import type {GetRoomsDto} from "@/dtos/GetRoomsDto";
-import { ChatStore } from "@/stores/chatStore";
+import { ChatStore } from "@/stores/ChatStore";
 import { useRouter } from 'vue-router'
+import {UserStore} from "@/stores/UserStore";
 const isModalOpen = ref(false);
 const searchInput = ref("");
 const rooms = ref<GetRoomsDto[]>([]);
@@ -59,9 +60,8 @@ const chatStore = ChatStore();
 const myRouter: any = useRouter();
 
 const roomService = inject<RoomService>("roomService");
-
-//TO CHANGE AFTER MERGING WITH LOGIN FUNCTIONALITY
-const loggedUserId = 1;
+const userStore = UserStore();
+const loggedUserId = userStore.id;
 
 roomService?.getAllRooms(loggedUserId)
     .then((result) => rooms.value = result.data as GetRoomsDto[])
