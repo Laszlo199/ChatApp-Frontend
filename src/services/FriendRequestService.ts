@@ -2,6 +2,7 @@ import { io } from "socket.io-client";
 import type { FriendRequestDto } from "@/dtos/FriendRequestDto";
 import type { GetUsersDto } from "@/dtos/GetUsersDto";
 import type { UpdateFriendRequestDto } from "@/dtos/UpdateFriendRequestDto";
+import axios from "axios";
 
 export class FriendRequestService {
   socket = io("localhost:3001");
@@ -13,23 +14,30 @@ export class FriendRequestService {
     });
   }
 
+  http = axios.create({
+    baseURL: "http://localhost:3001",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+
   createFriendRequest(friendDto: FriendRequestDto) {
     this.socket.emit("createFriendRequest", friendDto);
   }
   
-  // maybe not like that.
-  listenFriendRequest(status: string, statusListener: (user: GetUsersDto) => void){
-    this.socket.on(status, (user: GetUsersDto) =>{
-      statusListener(user);
+  listenFriendRequest(requestListener: (request: FriendRequestDto)=> void){
+    const userId = 1;
+    this.socket.on('request-'+userId, (request: FriendRequestDto) =>{
+      requestListener(request);
     })
 
   }
 
-   deleteFriendRequest(id: number) {
-    this.socket.emit("removeFriendRequest" + id);
+   async deleteFriendRequest(id: number) {
+    return this.http.delete("/deleteRequest"+id)
   }
 
   updateFriendRequest(id: number, updateFriendDto: UpdateFriendRequestDto){
-    this.socket.emit("updateFriendRequest"+id,updateFriendDto)
+    return this.http.patch("/updateRequest"+id,updateFriendDto)
   }
 }
