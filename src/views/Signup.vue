@@ -53,25 +53,18 @@ const info = ref("I don't have an account. Sign up instead!")
 const showMessage = ref(false);
 const messageIfSth = ref("Username doesn't exist or pass is wrong")
 
-//when we show info about empty field after each try we need to get back to default value corresponding to view
-//for each try at the very begining of sign in we will invoke needed method
-
-
-
-
-
 function changeSignUp(){
   showMessage.value = false;
 
   if(signingUp.value ==="Sign in"){
     signingUp.value = "Sign Up";
     info.value = "hmm ..Sign in anyway!"
-    messageIfSth.value = "Username already exist";//it must be opposite
+    messageIfSth.value = "Username already exist";
     }
   else{
     signingUp.value = "Sign in";
-    info.value = "I don't have an account. Sign up instead!" //where we will switch 
-    messageIfSth.value = "Username doesn't exists or pass is wrong"; //it must be opposite
+    info.value = "I don't have an account. Sign up instead!"
+    messageIfSth.value = "Username doesn't exists or pass is wrong";
     }
 }
 

@@ -27,7 +27,7 @@
           <tr v-for="chat in chatStore.chats" v-bind:key="chat.text" class="hover:bg-slate-200">
             <!--user that wrote that chat-->
             <td class="basis 1/4">
-              <div class="font-semibold">{{ chat.userId }}</div>
+              <div class="font-semibold">{{ chat.userN }}</div>
             </td>
             <!--AUTHOR-->
             <td class="basis 1/2" >{{chat.text}}</td>
@@ -44,7 +44,9 @@ import type { GetChatDto } from "@/dtos/chat/GetChatDto";
 import type { GetRoomsDto } from "@/dtos/GetRoomsDto";
 import { ChatStore } from "@/stores/chatStore";
 import { computed, ref } from "vue";
+import { UserStore } from "@/stores/UserStore";
 const chatStore = ChatStore();
+const userStore = UserStore()
 const txtChatInput = ref("");
 const txtRoomListener = ref("");
 
@@ -52,8 +54,8 @@ const txtRoomListener = ref("");
 function sendChat() {
     //TODO  show a real name 
     let chatToSend = { text: txtChatInput.value, roomName: chatStore.roomName,
-     userId: Date.now() % 234 }; // we need a user id from userStore (not merged yet with main branch)
-    console.log("text:: "+ chatToSend.text)
+     userN:  userStore.userName}; // we need a user id from userStore (not merged yet with main branch)
+    console.log("text:: "+ chatToSend.text + "creator: "+ userStore.userName)
     chatStore.createChat(chatToSend);
 }
 </script>
