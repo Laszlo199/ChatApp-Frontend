@@ -21,7 +21,7 @@
       <div v-for="request in friendRequests" class="flex flex-row gap-4">
         <div class="font-medium">{{ request.username }}</div>
         <CheckIcon class="h-6 w-6 stroke-slate-400"/>
-        <XIcon class="h-6 w-6 stroke-slate-400"/>
+        <XIcon class="h-6 w-6 stroke-slate-400"v-on:click="deleteFriendRequests"/>
       </div>
     </div>
 
@@ -40,7 +40,7 @@
               <UserGroupIcon class="h-6 w-6 stroke-slate-400"/>
             </div>
             <div v-else-if="user.status == 'NONE'" class="flex flex-row gap-4">
-              <UserAddIcon class="h-6 w-6 stroke-slate-400"/>
+              <UserAddIcon class="h-6 w-6 stroke-slate-400" v-on:click="createFriendRequest"/>
             </div>
             <div v-else-if="user.status == 'INVITATIONSENT'" class="flex flex-row gap-2 items-center">
               <div class="italic">your request is pending...</div>
@@ -102,7 +102,11 @@ function sortUsers(type) {
 }
 
 function createFriendRequest(){
-  //friendRequestService?.createFriendRequest()
+  friendRequestService?.createFriendRequest()
+}
+function deleteFriendRequests(){
+
+  //friendRequestService?.deleteFriendRequest()
 }
 
 </script>
