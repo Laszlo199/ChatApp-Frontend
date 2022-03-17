@@ -20,7 +20,7 @@
       <h3 class="font-semibold text-lg text-slate-900">Friend requests</h3>
       <div v-for="request in friendRequests" class="flex flex-row gap-4">
         <div class="font-medium">{{ request.username }}</div>
-        <CheckIcon class="h-6 w-6 stroke-slate-400"/>
+        <CheckIcon class="h-6 w-6 stroke-slate-400"v-on:click="updateFriendRequest(request)"/>
         <XIcon class="h-6 w-6 stroke-slate-400"v-on:click="deleteFriendRequests(request)"/>
       </div>
     </div>
@@ -104,11 +104,16 @@ function sortUsers(type) {
 
 function createFriendRequest(userId: number){
 
-  friendRequestService?.createFriendRequest({senderId: loggedUserId,receiverId: userId,isAccepted: false})
+  friendRequestService?.createFriendRequest({senderId: loggedUserId, receiverId: userId, isAccepted: false})
 }
 function deleteFriendRequests(requestId: number){
 
   friendRequestService?.deleteFriendRequest(requestId)
+}
+
+function updateFriendRequest(requestId: number){
+
+  friendRequestService?.updateFriendRequest( requestId,{isAccepted: true})
 }
 
 </script>
