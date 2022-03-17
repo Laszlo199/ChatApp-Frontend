@@ -21,7 +21,7 @@
       <div v-for="request in friendRequests" class="flex flex-row gap-4">
         <div class="font-medium">{{ request.username }}</div>
         <CheckIcon class="h-6 w-6 stroke-slate-400"/>
-        <XIcon class="h-6 w-6 stroke-slate-400"v-on:click="deleteFriendRequests"/>
+        <XIcon class="h-6 w-6 stroke-slate-400"v-on:click="deleteFriendRequests(request)"/>
       </div>
     </div>
 
@@ -40,7 +40,7 @@
               <UserGroupIcon class="h-6 w-6 stroke-slate-400"/>
             </div>
             <div v-else-if="user.status == 'NONE'" class="flex flex-row gap-4">
-              <UserAddIcon class="h-6 w-6 stroke-slate-400" v-on:click="createFriendRequest"/>
+              <UserAddIcon class="h-6 w-6 stroke-slate-400" v-on:click="createFriendRequest(user)"/>
             </div>
             <div v-else-if="user.status == 'INVITATIONSENT'" class="flex flex-row gap-2 items-center">
               <div class="italic">your request is pending...</div>
@@ -75,6 +75,7 @@ const friendRequests = ref([]);
 //TO CHANGE AFTER MERGING WITH LOGIN FUNCTIONALITY
 const loggedUserId = 1;
 
+
 userService?.getAllUsers(loggedUserId)
     .then((response) => {
       users.value = response.data as GetUsersDto[];
@@ -101,12 +102,13 @@ function sortUsers(type) {
   sortType.value = type;
 }
 
-function createFriendRequest(){
-  friendRequestService?.createFriendRequest()
-}
-function deleteFriendRequests(){
+function createFriendRequest(userId: number){
 
-  //friendRequestService?.deleteFriendRequest()
+  friendRequestService?.createFriendRequest({senderId: loggedUserId,receiverId: userId,isAccepted: false})
+}
+function deleteFriendRequests(requestId: number){
+
+  friendRequestService?.deleteFriendRequest(requestId)
 }
 
 </script>
