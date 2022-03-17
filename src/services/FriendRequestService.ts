@@ -15,5 +15,7 @@ export class FriendRequestService {
     this.socket.emit("createFriendRequest", friendDto);
   }
 
-  
+  getFriendRequest(friendDto: FriendRequestDto){
+    this.socket.emit("getFriendRequest", friendDto);
+  }
 }
