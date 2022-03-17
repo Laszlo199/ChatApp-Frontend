@@ -13,7 +13,8 @@
     "@heroicons/vue": "^1.0.6",
     "axios": "^0.26.1",
     "lodash": "^4.17.21",
-    "pinia": "^2.0.12",
+    "pinia": "^2.0.11",
+    "socket.io-client": "^4.4.1",
     "underscore": "^1.13.2",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"
