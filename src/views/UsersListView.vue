@@ -63,6 +63,7 @@ import * as _ from 'underscore';
 import type {GetUsersDto} from "@/dtos/GetUsersDto";
 import {UserService} from "@/services/UserService";
 import { FriendRequestService } from "@/services/FriendRequestService";
+import { UserStore } from "@/stores/UserStore";
 
 const userService = inject<UserService>("userService");
 const friendRequestService = inject<FriendRequestService>("friendService");
@@ -71,9 +72,10 @@ const searchInput = ref("");
 const sortType = ref("none"); //none ; friendStatus ; alphabetically
 const users = ref([]);
 const friendRequests = ref([]);
+const userStore = UserStore();
 
 //TO CHANGE AFTER MERGING WITH LOGIN FUNCTIONALITY
-const loggedUserId = 1;
+const loggedUserId = userStore.loggedInUser.id;
 
 
 userService?.getAllUsers(loggedUserId)
