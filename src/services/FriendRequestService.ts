@@ -1,6 +1,5 @@
 import { io } from "socket.io-client";
 import type { FriendRequestDto } from "@/dtos/FriendRequestDto";
-import type { GetUsersDto } from "@/dtos/GetUsersDto";
 import type { UpdateFriendRequestDto } from "@/dtos/UpdateFriendRequestDto";
 import axios from "axios";
 import { UserStore } from "@/stores/UserStore";
@@ -23,7 +22,7 @@ export class FriendRequestService {
   });
 
   createFriendRequest(friendDto: FriendRequestDto) {
-    this.socket.emit("createFriendRequest", friendDto);
+    this.socket.emit("createFriendRequest"+friendDto);
   }
   
   listenFriendRequest(requestListener: (request: FriendRequestDto)=> void){

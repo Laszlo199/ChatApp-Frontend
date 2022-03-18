@@ -20,8 +20,8 @@
       <h3 class="font-semibold text-lg text-slate-900">Friend requests</h3>
       <div v-for="request in friendRequests" class="flex flex-row gap-4">
         <div class="font-medium">{{ request.username }}</div>
-        <CheckIcon class="h-6 w-6 stroke-slate-400"v-on:click="updateFriendRequest(request)"/>
-        <XIcon class="h-6 w-6 stroke-slate-400"v-on:click="deleteFriendRequests(request)"/>
+        <CheckIcon class="h-6 w-6 stroke-slate-400" v-on:click="updateFriendRequest(request.id)"/>
+        <XIcon class="h-6 w-6 stroke-slate-400" v-on:click="deleteFriendRequests(request.id)"/>
       </div>
     </div>
 
@@ -40,7 +40,9 @@
               <UserGroupIcon class="h-6 w-6 stroke-slate-400"/>
             </div>
             <div v-else-if="user.status == 'NONE'" class="flex flex-row gap-4">
-              <UserAddIcon class="h-6 w-6 stroke-slate-400" v-on:click="createFriendRequest(user)"/>
+              <button @click="createFriendRequest(user.id)">
+              <UserAddIcon class="h-6 w-6 stroke-slate-400"/>
+              </button>
             </div>
             <div v-else-if="user.status == 'INVITATIONSENT'" class="flex flex-row gap-2 items-center">
               <div class="italic">your request is pending...</div>
@@ -61,8 +63,8 @@ import SortMenu from '@/components/SortMenu.vue'
 import {UserGroupIcon, UserAddIcon, CheckIcon, XIcon, SearchIcon, ClockIcon} from "@heroicons/vue/outline";
 import * as _ from 'underscore';
 import type {GetUsersDto} from "@/dtos/GetUsersDto";
-import {UserService} from "@/services/UserService";
-import { FriendRequestService } from "@/services/FriendRequestService";
+import type {UserService} from "@/services/UserService";
+import type { FriendRequestService } from "@/services/FriendRequestService";
 import { UserStore } from "@/stores/UserStore";
 
 const userService = inject<UserService>("userService");

@@ -42,7 +42,7 @@ import type { UserService } from "@/services/UserService";
 import { UserStore } from "../stores/userStore";
 import { inject, ref } from "vue";
 import { useRouter } from 'vue-router'
-import { FriendRequestService } from "@/services/FriendRequestService";
+import type { FriendRequestService } from "@/services/FriendRequestService";
 const username = ref("")
 const password = ref("")
 const signingUp = ref("Sign in");
