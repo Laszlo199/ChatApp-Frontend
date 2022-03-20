@@ -27,8 +27,8 @@
           <label clas="hover:cursor-pointer" @click="changeSignUp">{{info}}</label>
         </div>
 
-        <button @click="signIn" class="block w-full bg-purple-600 py-4 rounded
-        text-slate-100 font-bold text-base hover:bg-purple-500">{{signingUp}}</button>
+        <button @click="signIn" class="block w-full bg-indigo-300 py-4 rounded
+        text-slate-700 font-bold text-base hover:bg-indigo-200">{{signingUp}}</button>
       </form>
 
     </div>

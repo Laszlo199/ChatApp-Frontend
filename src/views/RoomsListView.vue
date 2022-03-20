@@ -50,7 +50,7 @@
 import {PlusCircleIcon, ChevronRightIcon, SearchIcon} from "@heroicons/vue/outline";
 import {computed, inject, ref} from "vue";
 import CreateRoomModal from "@/components/CreateRoomModal.vue";
-import {RoomService} from "@/services/RoomService";
+import type {RoomService} from "@/services/RoomService";
 import type {GetRoomsDto} from "@/dtos/GetRoomsDto";
 import { ChatStore } from "@/stores/ChatStore";
 import { useRouter } from 'vue-router'
