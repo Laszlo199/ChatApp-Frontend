@@ -22,7 +22,7 @@ export class FriendRequestService {
   });
 
   createFriendRequest(friendDto: FriendRequestDto) {
-    this.socket.emit("createFriendRequest"+friendDto);
+    this.socket.emit("createFriendRequest",friendDto);
   }
   
   listenFriendRequest(requestListener: (request: FriendRequestDto)=> void){
@@ -35,10 +35,10 @@ export class FriendRequestService {
   }
 
    async deleteFriendRequest(id: number) {
-    return this.http.delete("/deleteRequest"+id)
+    return this.http.delete("/friendRequest/deleteRequest"+id)
   }
 
   async updateFriendRequest(id: number, updateFriendDto: UpdateFriendRequestDto){
-    return this.http.patch("/updateRequest"+id,updateFriendDto)
+    return this.http.patch("/friendRequest/updateRequest"+id,updateFriendDto)
   }
 }
