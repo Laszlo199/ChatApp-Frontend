@@ -2,33 +2,33 @@
   <div class="min-h-screen flex items-center justify-center">
 
     <!--login box    -->
-    <div class="px-16 shadow-2xl pt-16 pb-11 rounded-2xl  w-1/3 bg-amber-100">
+    <div class="px-16 shadow-2xl pt-16 pb-11 rounded-2xl  w-1/3 bg-slate-800">
 
-      <h3  class="text-slate-900 font-bold text-5xl mb-12 text-center	">{{signingUp}}</h3>
+      <h3  class="text-slate-100 font-bold text-5xl mb-12 text-center">{{signingUp}}</h3>
 
       <form @submit.prevent="signIn" class="text-slate-900 space-y-7 py-2 px-4">
         <div class="">
-          <label class="block mb-1 font-bold text-gray-500">Username: </label>
-          <input v-model="username" class="border border-gray-400 p-3 w-full rounded-xl outline-none
-          focus:border-b-blue-600 border-2" type="text" placeholder="insert username..">
+          <label class="block mb-1 font-bold text-indigo-300">Username: </label>
+          <input v-model="username" class="border-indigo-300 bg-slate-800 text-slate-100 p-3 w-full rounded-xl outline-none
+          focus:border-indigo-500 border-2" type="text" placeholder="enter your username...">
           <div class="pt-1">
-          <label class=" pl-0.5 text-red-700 "
-          v-show="showMessage">{{messageIfSth}}</label> </div><!--remember to delete '!' just for the sake of design we keep it    -->
+            <label class=" pl-0.5 text-red-500 "
+            v-show="showMessage">{{messageIfSth}}</label> 
+          </div>
         </div>
 
         <div class="">
-          <label class="block mb-1 font-bold text-gray-500">Password: </label>
-          <input v-model="password" class="border border-gray-400 p-3 w-full rounded-xl
-          outline-none focus:border-b-blue-600 border-2" type="password" placeholder="insert password..">
+          <label class="block mb-1 font-bold text-indigo-300">Password: </label>
+          <input v-model="password" class="border-indigo-300 bg-slate-800 text-slate-100 p-3 w-full rounded-xl
+          outline-none focus:border-indigo-500 border-2" type="password" placeholder="enter your password...">
         </div>
 
-        <div class=" ml-2 text-gray-800 font-bold text-blue-600
-        outline-none hover:text-blue-900">
-          <label  @click="changeSignUp">{{info}}</label>
+        <div class="ml-2 text-indigo-300 outline-none hover:text-indigo-100 hover:cursor-pointer">
+          <label clas="hover:cursor-pointer" @click="changeSignUp">{{info}}</label>
         </div>
 
         <button @click="signIn" class="block w-full bg-purple-600 py-4 rounded
-        text-purple-900 font-bold text-base hover:bg-purple-500">{{signingUp}}</button>
+        text-slate-100 font-bold text-base hover:bg-purple-500">{{signingUp}}</button>
       </form>
 
     </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import type { GetUsersDto } from "@/dtos/GetUsersDto";
+import type { GetUserDto } from "@/dtos/user/GetUserDto";
 import type { UserService } from "@/services/UserService";
 import { UserStore } from "../stores/userStore";
 import { inject, ref } from "vue";
@@ -51,47 +51,43 @@ const userStore = UserStore();
 const myRouter: any = useRouter();
 const info = ref("I don't have an account. Sign up instead!")
 const showMessage = ref(false);
-const messageIfSth = ref("Username doesn't exist or pass is wrong")
+const messageIfSth = ref("Username doesn't exist or the password is wrong")
 
 function changeSignUp(){
   showMessage.value = false;
 
   if(signingUp.value ==="Sign in"){
     signingUp.value = "Sign Up";
-    info.value = "hmm ..Sign in anyway!"
-    messageIfSth.value = "Username already exist";
+    info.value = "I have an account already. Sign in instead."
+    messageIfSth.value = "Username already exists";
     }
   else{
     signingUp.value = "Sign in";
     info.value = "I don't have an account. Sign up instead!"
-    messageIfSth.value = "Username doesn't exists or pass is wrong";
+    messageIfSth.value = "Username doesn't exist or the password is wrong";
     }
 }
 
 async function signIn(this: any){
   if(!username.value){
     showMessage.value= true;
-    messageIfSth.value = "empty username .."
+    messageIfSth.value = "username cannot be empty!"
   }else{
     if(signingUp.value ==="Sign in")
-        messageIfSth.value = "Username doesn't exists or pass is wrong";
+        messageIfSth.value = "Username doesn't exists or the password is wrong";
     else
         messageIfSth.value = "Username already exists";
-
   }
     
 
     if(username.value && password.value){
       showMessage.value = false; //go to default in case it was selected
 
-      console.log(username.value)
-      console.log(password.value)
-
       if(signingUp.value ==="Sign in"){
           await userService?.signIn({username: username.value,
             password: password.value}).then(
             response =>{
-              loggedUser.value = response.data as GetUsersDto;
+              loggedUser.value = response.data as GetUserDto;
             }
           ).catch((error) => {
               console.log("error: " + error.message);
@@ -103,7 +99,8 @@ async function signIn(this: any){
           await userService?.signUp({username: username.value,
             password: password.value}).then(
             response =>{
-              loggedUser.value = response.data as GetUsersDto;
+              loggedUser.value = response.data as GetUserDto;
+              console.log(response.data);
             }
           ).catch((error) => {
               console.log("error: " + error.message);
@@ -138,9 +135,5 @@ async function signIn(this: any){
 </script>
 
 <style scoped>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 
 </style>

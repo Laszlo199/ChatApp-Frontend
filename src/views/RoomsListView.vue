@@ -3,18 +3,20 @@
   <CreateRoomModal v-if="isModalOpen" @close="isModalOpen=false; refreshList()"/>
 
   <div class="flex justify-center h-screen w-screen">
-    <div class="container drop-shadow-md p-5 flex-col bg-slate-100 rounded-xl w-2/5 h-2/3">
+    <div class="container drop-shadow-md p-5 flex-col bg-slate-900 border-2 border-indigo-400 rounded-xl w-2/5 h-2/3">
 
       <!--HEADER-->
       <div class="mb-5">
-        <PlusCircleIcon @click="isModalOpen=true" class="h-6 w-6 stroke-slate-400 float-right hover:stroke-slate-600 cursor-pointer z-10"/>
-        <h2 class="text-xl font-bold text-slate-900 text-center">Rooms</h2>
+        <PlusCircleIcon @click="isModalOpen=true" class="h-6 w-6 stroke-slate-300 float-right hover:stroke-indigo-300 cursor-pointer z-10"/>
+        <h2 class="text-xl font-bold text-indigo-300 text-center">Rooms</h2>
       </div>
 
       <!--SEARCH FIELD-->
       <form class="group relative mb-5">
         <SearchIcon class="h-6 w-6 stroke-slate-300 bg-red-300 absolute left-3 top-1/2 -mt-2.5 text-slate-400 pointer-events-none group-focus-within:text-blue-500"/>
-        <input class="focus:ring-2 focus:ring-slate-400 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm" type="text" aria-label="Filter projects"
+        <input class="text-slate-100 focus:ring-2 focus:ring-slate-700 focus:outline-none appearance-none w-full 
+        text-sm leading-6 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-700 shadow-sm bg-slate-700" 
+        type="text" aria-label="Filter projects"
                placeholder="Search..." v-model="searchInput">
       </form>
 
@@ -22,18 +24,18 @@
       <div class="w-full overflow-y-scroll h-2/3">
         <table class="table-auto w-full">
           <tbody>
-          <tr v-for="room in filteredRooms" v-bind:key="room.id" class="hover:bg-slate-200">
+          <tr v-for="room in filteredRooms" v-bind:key="room.id" class="hover:bg-slate-800">
             <!--NAME-->
             <td class="basis 1/4">
-              <div class="font-semibold">{{ room.name }}</div>
+              <div class="font-semibold text-slate-100">{{ room.name }}</div>
             </td>
             <!--AUTHOR-->
-            <td class="basis 1/2" v-bind:class="{ italic: room.author=='you' }">{{room.author}}</td>
+            <td class="basis 1/2 text-indigo-300" v-bind:class="{ italic: room.author=='you' }">{{room.author}}</td>
             <!--JOIN BTN-->
             <td class="basis 1/4 float-right">
-              <button @click="goToRoom(room)" class="flex flex-row items-center h-8 px-6 rounded-md border border-slate-200 bg-white hover:scale-105" >
+              <button @click="goToRoom(room)" class="flex flex-row items-center h-8 px-6 rounded-md bg-indigo-300 hover:scale-105 my-1" >
                 <div class="font-medium text-slate-900">join</div>
-                <ChevronRightIcon class="h-4 w-4 stroke-slate-400"/>
+                <ChevronRightIcon class="h-4 w-4 stroke-black"/>
               </button>
             </td>
           </tr>

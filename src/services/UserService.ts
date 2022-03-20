@@ -1,6 +1,6 @@
 import axios from "axios";
-import type { UserCredentialsDto } from "@/dtos/userCredentialsDto";
-import type { GetUsersDto } from "@/dtos/GetUsersDto";
+import type { UserCredentialsDto } from "@/dtos/user/userCredentialsDto";
+import type { GetUsersDto } from "@/dtos/user/GetUsersDto";
 
 export class UserService {
     
