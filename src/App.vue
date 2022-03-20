@@ -18,7 +18,8 @@ function logOut() {
 </script>
 
 <template>
-  <div v-if="userStore.userName" class="bg-slate-500 mb-4 h-16 flex items-center place-content-between px-10">
+<div class="width-screen height-screen bg-slate-900">
+  <div v-if="userStore.userName" class="bg-slate-900 mb-4 h-16 flex items-center place-content-between px-10">
       <div class="float-left">
         <AnnotationIcon class="w-12 h-12 stroke-white"/>
       </div>
@@ -32,6 +33,7 @@ function logOut() {
   </div>
 
   <RouterView />
+</div>
 </template>
 
 <style>

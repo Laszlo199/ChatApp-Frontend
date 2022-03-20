@@ -1,5 +1,5 @@
 
-import type { GetUsersDto } from "@/dtos/GetUsersDto";
+import type { GetUsersDto } from "@/dtos/user/GetUsersDto";
 import { UserService } from "@/services/UserService";
 import { defineStore } from "pinia";
 import type { User } from "@/model/User";

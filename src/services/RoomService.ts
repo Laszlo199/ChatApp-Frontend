@@ -12,8 +12,8 @@ export class RoomService {
         return this.http.get("/rooms/userId/"+id);
     }
 
-    async createRoom(name: string): Promise<any> {
-        const result = await this.http.post<any>("/rooms", {name: name, authorId: 1});
+    async createRoom(name: string, userId: number): Promise<any> {
+        const result = await this.http.post<any>("/rooms", {name: name, authorId: userId});
         return result.data;
     }
 
