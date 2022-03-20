@@ -29,7 +29,7 @@
     </div>
 
     <!--FRIENDS LIST-->
-    <div class="w-full overflow-y-scroll h-2/3">
+    <div class="w-full overflow-y-scroll h-2/4">
       <h3 class="font-semibold text-lg text-indigo-300">All users</h3>
     <table class="table-fixed w-full">
       <tbody>
