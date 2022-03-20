@@ -1,5 +1,6 @@
 import type { PostChatDto } from "@/dtos/chat/PostChatDto";
 import { io } from "socket.io-client";
+import type {TypingDto} from "@/dtos/TypingDto";
 
 export class ChatService{
     socket = io("localhost:3001");
@@ -19,6 +20,16 @@ export class ChatService{
     this.socket.on(room, (chat: PostChatDto) => {
       chatListener(chat);
     });
+  }
+
+  listenForTyping(room: string, typingListener: (typingEvent: TypingDto) => void) {
+    this.socket.on(room+'-typing', (typingEvent: TypingDto) => {
+      typingListener(typingEvent);
+    });
+  }
+
+  setTyping(typing: TypingDto) {
+    this.socket.emit('typing', typing);
   }
 
   disconnectFromRoom(room: string) {
