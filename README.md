@@ -1,46 +1,26 @@
-# ChatApp-Backend
+# ChatApp - Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+Frontend of a 4th semester exam project for Computer Science program at Business Academy Southwest. Project is a website where users can add friends and speak with them in live chat rooms.
 
-## Recommended IDE Setup
+## Implemented user stories:
+- As a user I want to be able to register in the application.
+- As a user I want to be able to log in to the application. (Disregard security, just make a simple request to the database for matches)
+- As a user I want to be able to search through all other users.
+- As a user I want to be able to send friend requests to other users.
+- As a user I want push notifications when a friend request is send to me.
+- As a user I want to be able to create chat rooms. 
+- As a user I want to be able to join my own/friends chat rooms.
+- As a user I want to be able emit chat messages inside of joined rooms.
+- As a user I want to instantly receive chats emitted by other users in the room I'm currently in.
+- As a user I want to see if another user in the same room is typing a message.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
+## Technologies:
+- vue
+- tailwindCSS
+- pinia
 
-## Type Support for `.vue` Imports in TS
+## Screenshots:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+<img width="1432" alt="Screenshot 2022-03-21 at 10 28 18" src="https://user-images.githubusercontent.com/71661786/159234784-3426e5fe-fa06-463b-aad0-ca185dde98b2.png">
+<img width="1432" alt="Screenshot 2022-03-21 at 10 27 44" src="https://user-images.githubusercontent.com/71661786/159234798-090a556b-9350-4040-8ee8-74d184ced8d7.png">
+<img width="1432" alt="Screenshot 2022-03-21 at 10 29 34" src="https://user-images.githubusercontent.com/71661786/159234807-51e691b1-7b4e-4a96-9f7b-a78f65145707.png">
